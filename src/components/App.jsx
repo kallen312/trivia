@@ -4,7 +4,7 @@ import data from "../sample_data.json";
 
 function App() {
   let variable = 0;
-
+  let [isAnswered, setIsAnswered] = useState(false);
   return (
     <div className="app">
       <h1>Trivia!</h1>
@@ -13,15 +13,13 @@ function App() {
         return <Answer choices={choice} />;
       })}
       <NextQuestion />
-      {/* {
-        map is similar to a loop
-        array.map(function(x) {
-          x represents each element in the array
-          return (
-            ...add Answer component
-          )
-        })
-      } */}
+
+      <button onClick={() => setIsAnswered(true)}>Check Answer</button>
+      {isAnswered
+        ? data[variable].question.choices[
+            data[variable].question.correct_choice_index
+          ]
+        : ""}
     </div>
   );
 }
