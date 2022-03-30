@@ -13,7 +13,10 @@ function App() {
       {data[questionNumber].question.choices.map(function (choice) {
         return <Answer choices={choice} />;
       })}
-      <NextQuestion />
+      <NextQuestion onClickHandler={() => {
+        setQuestionNumber(questionNumber + 1);
+        setIsAnswered(false);
+        }} />
 
       <button onClick={() => setIsAnswered(true)}>Check Answer</button>
       {isAnswered
@@ -21,14 +24,16 @@ function App() {
             data[questionNumber].question.correct_choice_index
           ]
         : ""}
+
+
     </div>
   );
 }
 
 function NextQuestion(props) {
-  return <button>Next Question</button>;
+  return <button onClick= {props.onClickHandler}>NextQuestion</button>;
 }
-
+  
 function Question(props) {
   return <div>{props.question}</div>;
 }
@@ -36,5 +41,7 @@ function Question(props) {
 function Answer(props) {
   return <button>{props.choices}</button>;
 }
+
+
 
 export default App;
